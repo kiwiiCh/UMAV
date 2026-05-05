@@ -456,6 +456,7 @@ local function main()
     local destroyTank,destroyTankGui,destroyCar,destroyCarGui
     local destroyShrine,destroyShrineGui,destroyGojo,destroyGojoGui
     local destroyPet,destroyPetGui
+    local safeResetGojo  -- forward declare so Gojo technique closures can see it
 
     -- -- Validation --------------------------------------------
     local function isValid(obj)
@@ -1707,7 +1708,7 @@ local function main()
     end
 
     -- -- Safe state reset: always callable, clears stuck states --
-    local function safeResetGojo()
+    safeResetGojo = function()
         gojoGen = gojoGen + 1   -- FIX #4: invalidate all running technique threads
         gojoState  = "idle"
         blueThread = nil
